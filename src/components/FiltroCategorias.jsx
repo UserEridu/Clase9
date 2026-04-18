@@ -1,17 +1,12 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import CarProductos from "../components/CarProductos";
+import { Link } from "react-router-dom";
+
+const API='https://dummyjson.com/products/categories';
 
 
-
-
-const Categorias = () => {
-  const params = useParams()
-  const cat = params.cat;
-  const name = params.name;
-  const API=`https://dummyjson.com/products/category/${cat}`;
-  const [datos, setDatos] = useState([]);
+const FiltroCategorias = () => {
+  
+   const [datos, setDatos] = useState([]);
       const [loading, setLoading] = useState(true); 
       const [error, setError] = useState(null); 
     
@@ -23,7 +18,7 @@ const Categorias = () => {
               }
               const data = await response.json();
              
-              setDatos(data.products);
+              setDatos(data);
               setLoading(false);
           } catch (err) {
               setError(err.message);
@@ -33,7 +28,7 @@ const Categorias = () => {
   
       useEffect(() => {
           getDatos();
-      }, [cat]);
+      }, []);
   
        if (loading) {
           return (
@@ -52,20 +47,16 @@ const Categorias = () => {
                   <p>{error}</p>
               </div>
           );
-        }
-  return (
-    <>
-    <h4 className='text-center py-4'>{name}</h4>
-    <div className="container">
-      <h4 className='text-center py-4'>Tenemos {datos.length} {name}</h4>
-      <div className="row justify-content-center">
-      {datos.map((item)=>(
-        <CarProductos item={item}/>
-      ))}
-      </div>
-    </div>
+      }
+
+    return (
+     <>
+       {datos.map((item, index) => (
+            <li key={index}><Link to={`/categorias/${item.slug}/${item.name}`} className="dropdown-item" href="#">{item.name}</Link></li>
+        ))}
+    
     </>
   )
 }
 
-export default Categorias
+export default FiltroCategorias

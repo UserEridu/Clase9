@@ -10,6 +10,7 @@ import Contactos from './page/Contactos'
 import Error404 from './page/Error404'
 import SkinCare from './page/SkinCare'
 import Tablets from './page/Tablets'
+import Detalles from './page/Detalles'
 
 const App = () => {
   return (
@@ -19,10 +20,11 @@ const App = () => {
         <Routes>
          <Route path='/' element={<Inicio/>}/>
          <Route path='/inicio' element={<Inicio/>}/>
+         <Route path='/detalles/:id/:title' element={<Detalles/>}/>
          <Route path='/laptop' element={<Laptop/>}/>
          <Route path='/movil' element={<Movil/>}/>
          <Route path='/tecno' element={<Tecno/>}/>
-         <Route path='/categorias' element={<Categorias/>}/>
+         <Route path='/categorias/:cat/:name' element={<Categorias/>}/>
          <Route path='/contactos' element={<Contactos/>}/>
          <Route path='/skin-care' element={<SkinCare/>}/>
          <Route path='/tablets' element={<Tablets/>}/>

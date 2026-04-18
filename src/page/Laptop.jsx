@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CarProductos from "../components/CarProductos";
 
 const API='https://dummyjson.com/products/category/laptops';
 
@@ -51,23 +52,7 @@ const Laptop = () => {
       <h4 className='text-center py-4'>Tenemos {datos.length} Laptops</h4>
       <div className="row justify-content-center">
       {datos.map((item)=>(
-        <div className="col-md-3 mb-5">
-        <div className="card h-100">
-          <div className="card-header">
-            <img src={item.thumbnail} alt="" className="img-fluid"/>
-            </div>
-          <div className="card-body text-center">
-            <p>{item.title}</p>
-        <h2 className="text-success">{item.price}$</h2>
-          </div>
-          <div className="card-footer text-center">
-            <button className="btn btn-outline-info btn-sm mx-3">Modal</button>
-            <button className="btn btn-outline-danger btn-sm mx-3">Detalles</button>
-          </div>
-          
-        
-        </div>
-        </div>
+       <CarProductos item={item}/>
       ))}
       </div>
     </div>

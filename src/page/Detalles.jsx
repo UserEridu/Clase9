@@ -1,16 +1,12 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import CarProductos from "../components/CarProductos";
 
-
-
-
-const Categorias = () => {
+const Detalles = () => {
   const params = useParams()
-  const cat = params.cat;
-  const name = params.name;
-  const API=`https://dummyjson.com/products/category/${cat}`;
+  const navigate = useNavigate();
+  const API=`https:dummyjson.com/products/${params.id}`
   const [datos, setDatos] = useState([]);
       const [loading, setLoading] = useState(true); 
       const [error, setError] = useState(null); 
@@ -23,7 +19,7 @@ const Categorias = () => {
               }
               const data = await response.json();
              
-              setDatos(data.products);
+              setDatos(data);
               setLoading(false);
           } catch (err) {
               setError(err.message);
@@ -33,7 +29,7 @@ const Categorias = () => {
   
       useEffect(() => {
           getDatos();
-      }, [cat]);
+      }, []);
   
        if (loading) {
           return (
@@ -52,20 +48,46 @@ const Categorias = () => {
                   <p>{error}</p>
               </div>
           );
-        }
+      }
   return (
     <>
-    <h4 className='text-center py-4'>{name}</h4>
     <div className="container">
-      <h4 className='text-center py-4'>Tenemos {datos.length} {name}</h4>
-      <div className="row justify-content-center">
-      {datos.map((item)=>(
-        <CarProductos item={item}/>
-      ))}
+            {/* Botón Volver */}
+            <div className="text-end my-3">
+                <button onClick={() => navigate(-1)} className="btn btn-secondary">
+                    ← Volver
+                </button>
+            </div>
+    <h4 className='text-center py-4'>{params.id} {params.title}</h4>
+    <div className='row'>
+      <div className='col-md-4 bg-info'>
+        <img src={datos.thumbnail} alt="" className='img-fluid'/>
       </div>
+      <div className='col-md-8'>
+        <p>Descripcion: {datos.description}</p>
+        <p>Categoria: {datos.category}</p>
+        <p>Precio: ${datos.price}</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+    <div>{datos.reviews.map((item)=>
+    
+    <p className='card'>
+    <b>Comentarios</b>: {item.comment} <br />
+    <b>Calificacion</b>: {item.rating} <br />
+    <b>Fecha</b>b: {item.date} <br />
+    <b>Usuario</b>: {item.reviewername} <br />
+    </p>
+    )}</div>
+
     </div>
     </>
   )
 }
 
-export default Categorias
+export default Detalles
