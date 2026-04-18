@@ -12,12 +12,46 @@ const CarProductos = ({item}) => {
                     <h2 className="text-success">{item.price}$</h2>
                 </div>
                 <div className="card-footer text-center">
-                    <button className="btn btn-outline-info btn-sm mx-3">Modal</button>
+                    <button className="btn btn-outline-info btn-sm mx-3" data-bs-toggle="modal" data-bs-target={`#${item.id}`}>Modal</button>
                     <Link to={`/detalles/${item.id}/${item.title}`} className="btn btn-outline-danger btn-sm mx-3">Detalles</Link>
                 </div>
 
 
             </div>
+
+            <div>
+  {/* Modal */}
+  <div className="modal fade" id={item.id} tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal-dialog modal-lg">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h1 className="modal-title fs-5" id="exampleModalLabel"> {item.title}</h1>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        </div>
+        <div className="modal-body">
+          <div className="row">
+            <div className="col-md-4">
+                <img src={item.thumbnail} alt="" />
+            </div>
+            <div className="col-md-8">
+                <p>Categoria: {item.category}</p>
+                <p>Marca: {item.brand}</p>
+                <p>Existencia: {item.stock}</p>
+                <p className="text-danger">Precio: {item.price}$</p>
+            </div>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
         </div>
     )
 }

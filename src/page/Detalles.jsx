@@ -61,14 +61,14 @@ const Detalles = () => {
     <h4 className='text-center py-4'>{params.id} {params.title}</h4>
     <div className='row'>
       <div className='col-md-4 bg-info'>
-        <img src={datos.thumbnail} alt="" className='img-fluid'/>
+        <img src={datos.thumbnail} alt="" className='img-fluid p-3'/>
       </div>
       <div className='col-md-8'>
         <p>Descripcion: {datos.description}</p>
         <p>Categoria: {datos.category}</p>
         <p>Precio: ${datos.price}</p>
-        <p></p>
-        <p></p>
+        <p>Porcentaje de Descuento: {datos.discountPercentage}</p>
+        <p>Rating: {datos.rating}%</p>
         <p></p>
         <p></p>
         <p></p>
@@ -77,7 +77,7 @@ const Detalles = () => {
     </div>
     <div>{datos.reviews.map((item)=>
     
-    <p className='card'>
+    <p className='border p-5 m-3'>
     <b>Comentarios</b>: {item.comment} <br />
     <b>Calificacion</b>: {item.rating} <br />
     <b>Fecha</b>b: {item.date} <br />
