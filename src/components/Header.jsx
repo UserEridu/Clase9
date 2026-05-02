@@ -1,9 +1,16 @@
+import { useCarrito } from "../context/CarritoContext";// 👈
 import React from 'react'
 import { Link } from 'react-router-dom'
 import FiltroCategorias from './FiltroCategorias'
+import { FaTable } from "react-icons/fa";
+import CarritoModal from "./CarritoModal";
 
 const Header = () => {
+
+  const { carrito } = useCarrito();
+
   return (
+
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
         <a className="navbar-brand" href="#"><img src="/public/logo/logo.png" alt="" width={250} /></a>
@@ -49,7 +56,21 @@ const Header = () => {
           </form>
         </div>
       </div>
-    </nav>
+
+       {carrito.length > 0 && (
+                    <button 
+                        type="button" 
+                        className="btn btn-outline-warning me-2"
+                        data-bs-toggle="modal"
+                         data-bs-target="#carritoModal">
+                            <div className="d-flex justify-content-between align-items-center gap-2">
+                                <FaTable /><span className="badge bg-danger m-1">{carrito.length}</span>
+                             </div>
+                    </button>
+                )}
+   <CarritoModal /> 
+   </nav>
+    
   )
 }
 

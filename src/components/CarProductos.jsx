@@ -1,10 +1,20 @@
+import { useCarrito } from "../context/CarritoContext"; // 👈
 import { Link } from "react-router-dom";
 
 const CarProductos = ({item}) => {
+
+   const { agregarAlCarrito, restarAlCarrito, carrito } = useCarrito();
+   const enCarrito = carrito.find(producto => producto.id === item.id);
+
     return (
         <div className="col-md-3 mb-5">
             <div className="card h-100">
                 <div className="card-header">
+                   {enCarrito && (
+                        <span className="position-absolute top-0 end-0 badge rounded-pill text-bg-warning fs-6 m-2">
+                            {enCarrito.cantidad}
+                        </span>
+                    )}
                     <img src={item.thumbnail} alt="" className="img-fluid" />
                 </div>
                 <div className="card-body text-center">
@@ -14,6 +24,21 @@ const CarProductos = ({item}) => {
                 <div className="card-footer text-center">
                     <button className="btn btn-outline-info btn-sm mx-3" data-bs-toggle="modal" data-bs-target={`#${item.id}`}>Modal</button>
                     <Link to={`/detalles/${item.id}/${item.title}`} className="btn btn-outline-danger btn-sm mx-3">Detalles</Link>
+                
+                    <div className="mt-2 pt-2 border-top">
+                        <button 
+                        className="btn btn-success btn-sm ms-3" 
+                         onClick={() => agregarAlCarrito(item)}>
+                            Agregar al carrito
+                        </button>
+                        {enCarrito && enCarrito.cantidad > 0 && (
+                         <button 
+                        className="btn btn-danger btn-sm ms-3 m-2" 
+                         onClick={() => restarAlCarrito(item)}>
+                            Eliminar
+                        </button>)}
+                       
+                    </div>
                 </div>
 
 

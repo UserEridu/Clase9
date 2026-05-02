@@ -1,3 +1,4 @@
+import { CarritoProvider } from './context/CarritoContext' // 👈
 import Footer from './components/Footer'
 import Header from './components/Header'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -14,26 +15,33 @@ import Detalles from './page/Detalles'
 
 const App = () => {
   return (
-    <BrowserRouter>
-    <div className='app'>
-      <Header/>
-        <Routes>
-         <Route path='/' element={<Inicio/>}/>
-         <Route path='/inicio' element={<Inicio/>}/>
-         <Route path='/detalles/:id/:title' element={<Detalles/>}/>
-         <Route path='/laptop' element={<Laptop/>}/>
-         <Route path='/movil' element={<Movil/>}/>
-         <Route path='/tecno' element={<Tecno/>}/>
-         <Route path='/categorias/:cat/:name' element={<Categorias/>}/>
-         <Route path='/contactos' element={<Contactos/>}/>
-         <Route path='/skin-care' element={<SkinCare/>}/>
-         <Route path='/tablets' element={<Tablets/>}/>
-         <Route path='*' element={<Error404/>}/>
-        </Routes>
+     <CarritoProvider> {/* 👈 Envuelve TODO */}
+      <BrowserRouter>
+        <div className='app'>
+          <Header/>
+            <Routes>
+            <Route path='/' element={<Inicio/>}/>
+            <Route path='/inicio' element={<Inicio/>}/>
+         
+            <Route path='/detalles/:id/:title' element={<Detalles/>}/>
+            <Route path='/laptop' element={<Laptop/>}/>
+            <Route path='/movil' element={<Movil/>}/>
+            <Route path='/tecno' element={<Tecno/>}/>
+            <Route path='/categorias/:cat/:name' element={<Categorias/>}/>
+            <Route path='/contactos' element={<Contactos/>}/>
+            <Route path='/skin-care' element={<SkinCare/>}/>
+            <Route path='/tablets' element={<Tablets/>}/>
+
+        
+
+
+          <Route path='*' element={<Error404/>}/>
+          </Routes>
       
-      <Footer/>
-    </div>
-    </BrowserRouter>
+        <Footer/>
+      </div>
+      </BrowserRouter>
+    </CarritoProvider>
   )
 }
 
