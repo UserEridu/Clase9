@@ -52,13 +52,17 @@ export const CarritoProvider = ({ children }) => {
 const restarAlCarrito = (producto) => {
   // Primero verificar si el producto existe y tiene cantidad > 0
   const productoEnCarrito = carrito.find(item => item.id === producto.id);
-  
-  if (!productoEnCarrito || productoEnCarrito.cantidad <= 0) {
-    return; // No hacer nada si la cantidad es 0 o el producto no existe
-  }
+
   
   setCarrito(prev => {
     const existe = prev.find(item => item.id === producto.id);
+
+  if(existe.cantidad==1){
+    return prev.filter(item => item.id !== producto.id)
+  }
+
+
+
     if (existe && existe.cantidad > 0) {
       return prev.map(item =>
         item.id === producto.id
